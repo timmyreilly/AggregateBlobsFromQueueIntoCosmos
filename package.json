@@ -1,0 +1,21 @@
+{
+  "name": "woopwoopone",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timmyreilly/AggregateBlobsFromQueueIntoCosmos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timmyreilly/AggregateBlobsFromQueueIntoCosmos/issues"
+  },
+  "homepage": "https://github.com/timmyreilly/AggregateBlobsFromQueueIntoCosmos#readme",
+  "dependencies": {
+    "azure-storage": "^2.10.1"
+  }
+}
