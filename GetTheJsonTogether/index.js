@@ -11,8 +11,15 @@ module.exports = async function (context, myQueueItem) {
     myQueueItem.forEach(x => context.log("Check it:" + x.content)); 
 
     const myStuff = myQueueItem.forEach(x => x.content.split("/")); 
-    context.log(myStuff); 
+    const m = myQueueItem.map( function(x) { return x.content.split("/")} ); 
 
-    var ourBlobs = myQueueItem.forEach(x => blobService.getBlobToText(x)); 
+    let beer;  
+    const ourB = m.map( x =>  blobService.getBlobToText(x[1], x[2], beer,  function(error, result, response) {
+        if(!error) {
+            context.log(result); 
+        }
+    })); 
+    
+    // var ourBlobs = myQueueItem.forEach(x => blobService.getBlobToText(x)); 
 //     blobService.getBlobToText()
 };
