@@ -1,0 +1,8 @@
+ponumber,datetime,locationid,locationname,locationaddress,locationpostcode,totalcost,totaltax
+CQE876,8/16/2018 9:06,CCC333,VanArsdel Ltd.,789 FE Road,98052,279.35,27.935
+ZFJ490,8/22/2018 7:30,CCC333,VanArsdel Ltd.,789 FE Road,98052,179.6,17.96
+EBN624,8/15/2018 11:51,DDD444,Wide World Importers,645 Roosevelt Avenue,98121,92.25,9.225
+QDZ867,9/5/2018 15:18,BBB222,Northwind Traders,456 Foodcenter Lane,98101,174.6,17.46
+ZPK089,8/25/2018 9:57,BBB222,Northwind Traders,456 Foodcenter Lane,98101,17.45,1.745
+COR028,8/14/2018 9:10,BBB222,Northwind Traders,456 Foodcenter Lane,98101,44.95,4.495
+RMH331,8/26/2018 23:19,AAA111,Contoso Suites,123 Wholesale Road,98112,97.3,9.73

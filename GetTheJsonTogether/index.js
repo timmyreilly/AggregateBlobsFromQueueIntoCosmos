@@ -31,6 +31,24 @@ module.exports = async function (context, myQueueItem) {
         )
     )
 
+    const contents = m.forEach(x => blobService.getBlobToText(
+        x[1],
+        x[2],
+        function(err, blobContent, blob) {
+            if(err) {
+                context.log("couldnt download: ", x[1], x[2]); 
+                context.log("POOOOOP");
+                context.log(err); 
+
+            } else {
+                context.log(blobContent);
+                return blobContent;  
+            }
+        }
+    )
+
+    
+
     
 
     // var ourBlobs = myQueueItem.forEach(x => blobService.getBlobToText(x)); 
