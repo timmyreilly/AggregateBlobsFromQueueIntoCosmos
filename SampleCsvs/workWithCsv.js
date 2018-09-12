@@ -1,11 +1,8 @@
-const fs = require('fs');
+// const fs = require('fs');
 
-// console.log(fs);
-print = console.log;
-var existenceOf = fs.exists("C:/Users/tireilly/GitHub/WOOPWOOPONE/SampleCsvs/20180910190100-OrderHeaderDetails.csv");
-
-fs.exists("")
-print(existenceOf);
+// var existenceOf = fs.exists("C:/Users/tireilly/GitHub/WOOPWOOPONE/SampleCsvs/20180910190100-OrderHeaderDetails.csv");
+const orderHeaderCsv = "20180910190100-OrderHeaderDetails.csv";
+const orderLineItemsCsv = "20180910190100-OrderLineItems.csv"
 
 //var csv is the CSV file with headers
 function csvJSON(csv) {
@@ -24,32 +21,72 @@ function csvJSON(csv) {
     //return JSON.stringify(result); //JSON
 }
 
-const fileName = "20180910190100-OrderHeaderDetails.csv"
 
-const getContents = new Promise((res, rej) => {
-    fs.readFile(fileName)
-        .done(stuff => console.log(stuff))
-        .fail(err => console.log(err));
-});
+var orderLineItemsContents = fs.readFileSync(orderLineItemsCsv, 'utf8');
+var orderLineItems = csvJSON(orderLineItemsContents);
 
+var orderHeaderContents = fs.readFileSync(orderHeaderCsv, 'utf8');
+var orderHeader = csvJSON(orderHeaderContents);
 
-
-function getStuff(file) {
-    return Promise(function (resolve, reject) {
-        if (typeof file != "string") {
-            return reject(new TypeError("inputs must be a string"));
-        }
-        return resolve(fs.readFile(file));
-    });
+function sweet(orderHeader, orderLineItems) {
+    return orderHeader.map(function (orderHeader) {
+        return { ponumber: orderHeader.ponumber, 
+        orderLineItems: 
+            orderLineItems.filter(function (orderLine) {
+                return orderLine.ponumber == orderHeader.ponumber;
+            })
+        }; 
+    })
 }
 
+let cheese = sweet(orderHeader, orderLineItems); 
+cheese[1].orderLineItems; 
 
-var myPromise = getStuff(fileName);
+function beep() {
+    var lists = [
+        {
+            "id": 5434364,
+            "name": "New Releases"
+        },
+        {
+            "id": 65456475,
+            name: "Thrillers"
+        }
+    ],
+        videos = [
+            {
+                "listId": 5434364,
+                "id": 65432445,
+                "title": "The Chamber"
+            },
+            {
+                "listId": 5434364,
+                "id": 675465,
+                "title": "Fracture"
+            },
+            {
+                "listId": 65456475,
+                "id": 70111470,
+                "title": "Die Hard"
+            },
+            {
+                "listId": 65456475,
+                "id": 654356453,
+                "title": "Bad Boys"
+            }
+        ];
 
-myPromise.then(function (result) {
-    console.log("result");
-}).catch(function (err) {
-    console.error(err);
-})
-
-var fileContent = fs.readFileSync(fileName, 'utf8');
+    return lists.map(function (list) {
+        return {
+            name: list.name,
+            videos:
+                videos.
+                    filter(function (video) {
+                        return video.listId === list.id;
+                    }).
+                    map(function (video) {
+                        return { id: video.id, title: video.title };
+                    })
+        };
+    });
+}
