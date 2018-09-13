@@ -29,7 +29,7 @@ module.exports = async function (context, myQueueItem) {
                 }
             }
         )
-    )
+    );
 
     const contents = m.forEach(x => blobService.getBlobToText(
         x[1],
@@ -45,7 +45,7 @@ module.exports = async function (context, myQueueItem) {
                 return blobContent;  
             }
         }
-    )
+    )); 
 
     
 
