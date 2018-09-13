@@ -39,6 +39,36 @@ function sweet(orderHeader, orderLineItems) {
     })
 }
 
+var sampleListing = 
+{
+    poNumber: 123,
+    dateTime: 123,
+    locationName: "Vandelay", 
+    locationAddress : "1355 Market", 
+    locationPostalCode : 97221,
+    totalCost: 123,
+    totalTax: 27.1,
+    OrderLineItems = [
+        {
+            productId: "e4e7068e-500e-4a00-8be4-630d4594735b",
+            quantity: 10, 
+            unitCost: 3.99,
+            totalCost: 39.90,
+            totalTax: 1.23,
+            productName: StarfruitExplosion
+        },
+        {
+            productId: "e4e7068e-500e-4a00-8be4-630d4594735b",
+            quantity: 10, 
+            unitCost: 3.99,
+            totalCost: 39.90,
+            totalTax: 1.23,
+            productName: StarfruitExplosion
+        }
+    ]
+
+}
+
 let cheese = sweet(orderHeader, orderLineItems); 
 cheese[1].orderLineItems; 
 
