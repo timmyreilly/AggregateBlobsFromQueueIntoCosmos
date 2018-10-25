@@ -45,6 +45,7 @@ module.exports = async function (context, myQueueItem) {
                 return blobContent;  
             }
         }
+        
     )); 
 
     
