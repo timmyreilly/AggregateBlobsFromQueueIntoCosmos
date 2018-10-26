@@ -9,52 +9,42 @@
 // }
 var rp = require('request-promise-native');
 var uuid = require('uuid/v4');
-
-// var mongoUri = "mongodb://dekissel-oh.documents.azure.com:10255/?ssl=true"
-// var mongoOptions = {
-//     auth: {
-//         user: 'secret-oh',
-//         password: 'asdfasdfasdf4QnveWYCupIRgTwOoEFry38W8YchY2FujALsF2Oqky0xoUckPrGzGQqzo29aUTL5tgUaS7Xw=='
-//      }
-// }
+var mongoClient = require("mongodb").MongoClient;
 
 var mongoClient = require("mongodb").MongoClient;
 const MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING;
+const DENIS_CONNECTION_STRING = process.env.DENIS_CONNECTION_STRING; 
 mongoClient.connect(MONGO_CONNECTION_STRING, function (err, db) {
   //db.close();
 });
 
-var reviews = [];
+var mongoOptions = {
+    auth: {
+        user: 'dekissel-oh',
+        password: DENIS_CONNECTION_STRING
+     }
+}
 
-// &replicaSet=globaldb
-console.log(MONGO_CONNECTION_STRING); 
+var reviews = [];
 
 module.exports = async function (context, req) {
     context.log('CreateRating Received a Request');
 
     if (!req.body) {
-        context.res = {
-            status: 400, 
-            body: "Please pass a json body with your request"
-        }
-        context.done();  
+        return {
+            status: 400,
+            body: "Please pass a JSON body with your request"
+        };
     }
-        context.log('- body exists');
+    context.log('- body exists');
 
     if (!req.body.rating || !(0 <= req.body.rating && req.body.rating <= 5)) {
-        context.res = {
-            status: 400, 
-            body: "Please pass a valid rating in your json body"
-        }
-        context.done(); 
+        return {
+            status: 400,
+            body: "Please submit a rating from 0-5"
+        };
     }
     context.log('- rating is valid');
-
-    async function checkUserId() {
-        return await rp('http://serverlessohuser.trafficmanager.net/api/GetUser?userId=' + req.body.userId)
-    }
-
-    context.log(checkUserId()); 
 
     if (req.body.userId && req.body.productId) {
         return rp('http://serverlessohuser.trafficmanager.net/api/GetUser?userId=' + req.body.userId)
@@ -98,9 +88,14 @@ module.exports = async function (context, req) {
         });
         
     } else {
-        context.res = {
+        return {
             status: 400,
             body: "Please submit a valid userId & productId"
         };
-    } 
+    }
+
+    return {
+        status: 200,
+        body: 'bbb'
+    };
 };
